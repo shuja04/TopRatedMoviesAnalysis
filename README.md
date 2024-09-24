@@ -1,5 +1,3 @@
-Project Title:
-
 # Top Rated Movies Analysis
 
 Project Description:
