@@ -34,54 +34,53 @@ select * from movies
 order by popularity desc;
 
 
--- 1. Missing Values Check
-SELECT 
-    COUNT(*) AS total_movies,
-    SUM(CASE WHEN popularity IS NULL THEN 1 ELSE 0 END) AS missing_popularity,
-    SUM(CASE WHEN release_date IS NULL THEN 1 ELSE 0 END) AS missing_release_date,
-    SUM(CASE WHEN title IS NULL THEN 1 ELSE 0 END) AS missing_title,
-    SUM(CASE WHEN vote_average IS NULL THEN 1 ELSE 0 END) AS missing_vote_average
+-- 1. Missing Values Check <br />
+    SELECT <br />
+    COUNT(*) AS total_movies, <br />
+    SUM(CASE WHEN popularity IS NULL THEN 1 ELSE 0 END) AS missing_popularity, <br />
+    SUM(CASE WHEN release_date IS NULL THEN 1 ELSE 0 END) AS missing_release_date, <br />
+    SUM(CASE WHEN title IS NULL THEN 1 ELSE 0 END) AS missing_title, <br />
+    SUM(CASE WHEN vote_average IS NULL THEN 1 ELSE 0 END) AS missing_vote_average <br />
 FROM movies;
 
 -- 2. Basic Statistics
 
-SELECT 
-    COUNT(*) AS total_movies,
-    AVG(vote_average) AS average_vote,
-    MAX(vote_average) AS highest_vote,
-    MIN(vote_average) AS lowest_vote
+SELECT <br />
+    COUNT(*) AS total_movies,<br />
+    AVG(vote_average) AS average_vote,<br />
+    MAX(vote_average) AS highest_vote,<br />
+    MIN(vote_average) AS lowest_vote<br />
 FROM movies;
 
 -- 3. changing data types
 
-alter table movies 
+alter table movies <br />
 add column dates date;
+<br />
+update movies set dates = str_to_date(release_date, '%m/%d/%Y');<br />
 
-update movies set dates = str_to_date(release_date, '%m/%d/%Y');
-
-alter table movies 
+alter table movies <br />
 drop column dates;
-
+<br />
 select * from movies;
-
+<br />
 alter table movies change dates release_date date;
 
 
 -- 4. Trends Over Time
 
-SELECT 
-    year(release_date) as release_year,
-    AVG(vote_average) AS average_rating
-FROM movies
-GROUP BY release_year
-ORDER BY release_year;
+SELECT <br />
+    year(release_date) as release_year,<br />
+    AVG(vote_average) AS average_rating<br />
+FROM movies<br />
+GROUP BY release_year<br />
+ORDER BY release_year;<br />
 
 -- 5. Most Popular Movies
 
 select popularity, title, vote_average from movies order by popularity desc limit 10;
 
 ## Visualizations
-- Include screenshots or links to your Power BI dashboard.
 
 1. New Card used for Total Number of Movies and Average Votes.
    - Created Measures for the above two components.
@@ -97,6 +96,9 @@ select popularity, title, vote_average from movies order by popularity desc limi
    
 ## Conclusion
 This project demonstrates the use of SQL and Power BI for data analysis and visualization, providing valuable insights into movie trends and ratings.
+
+![image](https://github.com/user-attachments/assets/9859617c-65fb-4371-9b03-7529a0817321)
+
 
 
 
